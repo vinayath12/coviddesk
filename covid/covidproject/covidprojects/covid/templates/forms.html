@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/maicons.css' %}">
+     <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mystyle2.css' %}">
+     <link rel="stylesheet" href="{% static 'vendor/owl-carousel/css/owl.carousel.css' %}">
+
+     <link rel="stylesheet" href="{% static 'vendor/animate/animate.css' %}">
+    <title>Title</title>
+</head>
+
+<body style="background-color:silver">
+ <div class="back-to-top"></div>
+
+
+    <nav class="navbar navbar-expand-lg  shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#"><span class="text-primary">Covid19</span>-kavach</a>
+
+<!--        <form action="#">-->
+<!--          <div class="input-group input-navbar">-->
+<!--            <div class="input-group-prepend">-->
+<!--              <span class="input-group-text" id="icon-addon1"><span class="mai-search"></span></span>-->
+<!--            </div>-->
+<!--            <input type="text" class="form-control" placeholder="Enter keyword.." aria-label="Username" aria-describedby="icon-addon1">-->
+<!--          </div>-->
+<!--        </form>-->
+
+<!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--          <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+
+        <div class="collapse navbar-collapse" id="navbarSupport">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'covidapp:main' %}">Home</a>
+            </li>
+           <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                 Places
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% for cat in links %}
+              <li><a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a></li>
+                  {% endfor %}
+
+           </ul>
+</div>
+<!--            <li class="nav-item">-->
+<!--              <ul>Places</ul>-->
+<!--                {% for cat in links %}-->
+<!--                <li><a href="{{cat.get_url}}">{{cat.name}}</a></li>-->
+<!--                {% endfor %}-->
+<!---->
+<!---->
+<!--            </li>-->
+
+
+            {% if user.is_authenticated %}
+              <li><h5 style="color:#84DBA1">Hi {{user.username}}</h5></li>
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'registrationapp:logout' %}" style="color:#84DBA1">Logout</a>
+<!--            </li>-->
+<!--               <li class="nav-item">-->
+<!--              <a class="btn btn-primary ml-lg-3" href="forms/createform">Covid Registration</a>-->
+<!--            </li>-->
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="registration/register" style="color:#84DBA1">Sigh-In</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="registration/login" style="color:#84DBA1">Login</a>
+            </li>
+<!--            <li class="nav-item">-->
+<!--              <a class="btn btn-primary ml-lg-3" href="forms/createform">Covid Registration</a>-->
+<!--            </li>-->
+            {% endif %}
+          </ul>
+        </div> <!-- .navbar-collapse -->
+      </div> <!-- .container -->
+    </nav>
+  </header>
+ <h3 style="text-align:center">Welcome to CovidInfo Desk</h3>
+
+
+<div class="box2">
+
+              <form method="POST" enctype="multipart/form-data">
+     {% csrf_token %}
+
+    <label>Enter your name:</label>
+    <input type="text" placeholder="enter your fullname" name="name"><br>
+     <label>Enter your age:</label>
+    <input type="text" placeholder="" name="age"><br>
+     <label>Enter your date-of-birth:</label>
+    <input type="date" placeholder="" name="dob"><br>
+      <label>Enter your gender:</label>
+    <input type="text" placeholder="" name="gender"><br>
+
+      <label>Enter your job:</label>
+    <input type="text" placeholder="" name="job"><br>
+       <label>Enter your email:</label>
+    <input type="email" placeholder="" name="email"><br>
+     <label>enter your vaccination place:</label>
+                   <select id="cars" name="place">
+      <option value="kottayam">kottayam</option>
+      <option value="alappuzha">alappuzha</option>
+       <option value="kollam">kollam</option>
+       <option value="ekm">ekm</option>
+                        <option value="TVM">TVM</option>
+      <option value="idukki">idukki</option>
+       <option value="kannur">kannur</option>
+       <option value="palakkadu">palakkadu </option>
+      </select><br>
+<!--      <input type="text" placeholder="yes/no" name="place"><br>-->
+      <label>Are you travelled outside the world in 30 days:</label>
+    <input type="text" placeholder="yes/no" name="traveling"><br>
+     <label>Did you take your covid vaccine?</label>
+      <input type="text" placeholder="yes/no" name="vaccines"><br>
+      <label>Did you ever tested covid-posistive?</label>
+
+
+     <input type="text" placeholder="yes/no" name="covidecheck"><br>
+    <label>Enter your phone number</label>
+      <input type="text" placeholder="" name="number"><br>
+       <h6 style="color:blue">please ensure that you filled all the fields</h6>
+      <input type="submit" style="background-color:#84DBA1;"><br>
+                  {% for msg in messages %}
+                    {{msg}}
+                  {% endfor %}
+              </form>
+
+ </div>
+<footer style="margin-top:100px">
+     <hr>
+      <p style="text-align:center" id="copyright">Copyright &copy; 2021 <a href="#" target="_blank">CovidKavach ID</a>. All rights are reserved
+ </footer>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'vendor/owl-carousel/js/owl.carousel.min.js' %}"></script>
+</body>
+</html>

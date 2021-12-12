@@ -1,0 +1,17 @@
+h2{
+    position:relative;
+    left:40px;
+    top:40px;
+    color:#84DBA1  ;
+}
+.box{
+       position:relative;
+       top:50px;
+       width:600px;
+       left:40px;}
+.box1{
+       position:relative;
+
+       width:800px;
+       left:40px;
+       color:#84DBA1 }
